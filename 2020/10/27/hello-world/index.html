@@ -55,6 +55,8 @@
   
 
   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/meteorlxy/vssue@1.4.4/packages/vssue/dist/vssue.min.css">
+  
 
   <!-- import link -->
   
@@ -537,9 +539,7 @@
   <article class="post white-box reveal shadow" id="comments">
     <p ct><i class='fas fa-comments'></i> 评论</p>
     
-    <div id="minivaline_container">
-  <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
-</div>
+    <div id="vssue"></div>
 
   </article>
 
@@ -1113,62 +1113,26 @@ var loadCSS = function( href, before, media, attributes ){
 
 
 
-  
-
-
-
+  <script src="https://cdn.jsdelivr.net/gh/vuejs/vue@2.6.11/dist/vue.runtime.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/meteorlxy/vssue@1.4.4/packages/vssue/dist/vssue.github.min.js"></script>
 <script>
-  function load_minivaline() {
-	setTimeout(function() {
-	
-	  loadScript('https://cdn.jsdelivr.net/npm/minivaline@4/dist/MiniValine.min.js', pjax_minivaline)
-	
-	}, 1);
-  };
-  function pjax_minivaline() {
-  if(!document.querySelectorAll("#minivaline_container")[0])return;
+  new Vue({
+    el: '#vssue',
 
-  let pagePlaceholder = pdata.commentPlaceholder || "";
-
-  let path = pdata.commentPath;
-  if (path.length == 0) {
-    let defaultPath = '';
-    path = defaultPath || decodeURI(window.location.pathname);
-  }
-
-  new MiniValine({
-    el: '#minivaline_container',
-    appId: '',
-    appKey: '',
-    mode: '',
-    placeholder: pagePlaceholder,
-    path: path,
-    lang: '',
-    adminEmailMd5: '',
-    tagMeta: [""],
-    master: [""],
-    friends: [""],
-    math: ,  /*布尔值 字符串无效 下同*/
-    md: ,
-    enableQQ: ,
-    NoRecordIP: ,
-    visitor: ,
-    maxNest: ,
-    pageSize: ,
-    barrager: ,
-    role: '',
-    closeFlag: ,
-    cloudflag: ,
-    closeUA: ,
-    emoticonUrl: [""],
-    serverURLs: '',
-    region: '',
-    });
-  }
-  $(function () {
-    if(!document.querySelectorAll("#minivaline_container")[0])return;
-    load_minivaline();
-  });
+    render: h => h('Vssue', {
+      props: {
+        title: "Hello World - 无语's Blog",
+        options: {
+          owner: '',
+          repo: '',
+          clientId: '',
+          clientSecret: '',
+          prefix: '',
+          autoCreateIssue: true,
+        },
+      }
+    })
+  })
 </script>
 
 
@@ -1621,12 +1585,6 @@ document.addEventListener("pjax:success", listennSidebarTOC);
         
         
         
-        
-          if (typeof MiniValine == "undefined") {
-            load_minivaline();
-          } else {
-            pjax_minivaline();
-          }
         
         
         
